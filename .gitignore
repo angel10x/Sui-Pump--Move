@@ -1,0 +1,3 @@
+build/*/bytecode_modules/*
+build/*/source/*
+build/*/source_maps/*
