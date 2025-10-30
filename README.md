@@ -327,7 +327,8 @@ public fun update_virtual_sui_liq(
 
 If you're interested in having the Pump.fun smart contract access or have any doubts, please reach out to me through the following contacts:
 
-- <a href="https://t.me/angel001000010100/">Telegram</a> 📱
-- <a href="https://discordapp.com/users/1114372741672488990">Discord</a> 🎮
+* [Telegram](https://t.me/angel001000010100)
+* [Discord](https://discordapp.com/users/1114372741672488990)
+* [WhatApp](https://chat.whatsapp.com/JoXNEFld9mQ7bLktoXgva0)
 
-### If you found this helpful, don't forget to <a href="https://github.com/sinniez">follow</a> me. 🌟
+### If you found this helpful, don't forget to [follow](https://github.com/angel10x) me. 🌟
