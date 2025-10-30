@@ -1,3 +1,8 @@
+/// Module: pumpfun::curve
+/// 
+/// Implements bonding curve-based token economics for the Sui blockchain. 
+/// This module contains all primitives and logic needed for minting, trading, migrating, and administrating tokens under a bonding curve, including event emission, fee management, and migration functions. 
+/// Structs and methods are provided for full on-chain curve lifecycle and fee configuration.
 module pumpfun::curve {
     use sui::event::{Self};
     use std::string;
@@ -17,6 +22,7 @@ module pumpfun::curve {
     const EReserveValuesNotGreaterThanZero: u64 = 5;
     const ECurveNotInactive: u64 = 6;
 
+    /// Bonding curve object. Holds liquidity pool state, configuration, and social fields for token projects.
     public struct BondingCurve<phantom T> has key {
         id: UID,
         sui_balance: balance::Balance<SUI>,
@@ -32,6 +38,7 @@ module pumpfun::curve {
         migration_target: u64,
     }
 
+    /// Global configuration state for bonding curve system. Manages migration, listing, swap fees, and system fee accumulation.
     public struct Configurator has key {
         id: UID,
         virtual_sui_amt: u64,
@@ -42,6 +49,7 @@ module pumpfun::curve {
         fee: balance::Balance<SUI>,
     }
 
+    /// Emitted on bonding curve listing.
     public struct BondingCurveListedEvent has copy, drop {
         object_id: object::ID,
         token_type: ascii::String,
@@ -61,11 +69,13 @@ module pumpfun::curve {
         migration_target: u64,
     }
 
+    /// Emitted for every fee paid in the system, can be used for user or volume based reward systems.
     public struct Points has copy, drop {
         amount: u64,
         sender: address,
     }
 
+    /// Emitted for every swap executed (buy or sell).
     public struct SwapEvent has copy, drop {
         bc_id: object::ID,
         token_type: ascii::String,
@@ -77,13 +87,14 @@ module pumpfun::curve {
         sender: address,
     }
 
+    /// Emitted when a migration process is initiated (bonding curve deactivation).
     public struct MigrationPendingEvent has copy, drop {
         bc_id: object::ID,
         token_type: ascii::String,
         sui_reserve_val: u64,
         token_reserve_val: u64,
     }
-
+    /// Emitted when a migration process completes (funds successfully migrated).
     public struct MigrationCompletedEvent has copy, drop {
         adapter_id: u64,
         bc_id: object::ID,
@@ -93,6 +104,7 @@ module pumpfun::curve {
         token_balance_val: u64,
     }
 
+    /// Administration capability object for system configuration management. Only needed by system admin.
     public struct AdminCap has store, key {
         id: UID,
     }
